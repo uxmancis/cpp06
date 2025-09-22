@@ -6,7 +6,7 @@
 #    By: uxmancis <uxmancis>                        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/07/12 15:30:41 by uxmancis          #+#    #+#              #
-#    Updated: 2025/09/18 11:56:05 by uxmancis         ###   ########.fr        #
+#    Updated: 2025/09/22 11:26:58 by uxmancis         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,12 +16,12 @@ CFLAGS = -Wall -Wextra -Werror -std=c++98 -fsanitize=address
 
 # Source files and object files
 SRC =	main.cpp\
-		ScalarConverter.cpp
+		Serializer.cpp
 
 OBJ = $(SRC:.cpp=.o)
 
 # Executable name
-NAME = convert
+NAME = cpp06_ex01
 
 # Make all rule
 all: $(NAME)

@@ -5,31 +5,23 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: uxmancis <uxmancis>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/09/17 15:59:58 by uxmancis          #+#    #+#             */
-/*   Updated: 2025/09/18 17:45:36 by uxmancis         ###   ########.fr       */
+/*   Created: 2025/09/22 10:37:33 by uxmancis          #+#    #+#             */
+/*   Updated: 2025/09/22 11:46:27 by uxmancis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MAIN_HPP
 #define MAIN_HPP
 
-#include <iostream> //std:: --> cout, endl
-#include <algorithm> //std:: --> find, count
-#include <limits.h> //INT_MIN, INT_MAX
-#include <stdio.h>
+#include <iostream>
+#include <stdint.h> //uintptr_t
+#include "Data.hpp"
+#include "Serializer.hpp"
 
-#include "ScalarConverter.hpp"
-
-enum Type {
-    CHAR,
-    INT,
-    FLOAT,
-    DOUBLE,
-    INVALID
-};
-
-#define AQUAMARINE "\033[36m"   // Cyan
-#define RED "\033[31m"
+#define RESET_COLOUR   "\033[0m"
+#define RED     "\033[31m"
+#define GREEN   "\033[32m"
+#define WHITE   "\033[37m"
 
 
 #endif

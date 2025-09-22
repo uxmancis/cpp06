@@ -6,41 +6,23 @@
 /*   By: uxmancis <uxmancis>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/17 13:27:36 by uxmancis          #+#    #+#             */
-/*   Updated: 2025/09/17 16:36:21 by uxmancis         ###   ########.fr       */
+/*   Updated: 2025/09/18 13:17:19 by uxmancis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "main.hpp"
 
-bool is_pseudo(std::string input_str)
+int main(int argc, char **argv)
 {
-    const char *arr[6] = {"-inff", "+inff", "nanf", "-inf", "+inf", "nan"};
+    (void) argc;
+    (void) argv;
 
-    int occurrences = std::count(arr, arr + 6, input_str);
-    std::cout << "occurrences = " << occurrences << std::endl;
-    if (occurrences == 0)
-        return (false);
+    if (argc != 2)
+        std::cout << "Invalid input" << std::endl;
     else
-        return (true);
-}
+    {
+        ScalarConverter::convert((std::string)argv[1]);
+    }
 
-int main(void)
-{
-    std::string input_str;
-
-    if (is_pseudo(input_str))
-        std::cout << "Pseudo-literal, not possible to print" << std::endl;
-
-    
-    std::string str1 = "uxue";
-    std::string str2 = "uxue";
-
-    if (str1 == str2)
-        std::cout << "yess same" << std::endl;
-    else
-        std::cout << "NOT the same" << std::endl;
-
-    
-    
     return (0);
 }
