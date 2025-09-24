@@ -6,7 +6,7 @@
 /*   By: uxmancis <uxmancis>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/23 10:58:43 by uxmancis          #+#    #+#             */
-/*   Updated: 2025/09/23 11:49:46 by uxmancis         ###   ########.fr       */
+/*   Updated: 2025/09/24 16:16:25 by uxmancis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,20 @@ Base *generate(void)
     }
 }
 
+/*
+*   dynamic_cast<T*>(p) --> returns nullptr if the cast fails.
+*
+*   p: pointer to the base class.
+*   > At compile time the compiler only knows "this is a Base"
+*   > At runtime, p might actually be pointing to an A, B or C.
+*
+*   dynamic_cast lets us safely ask the runtime, hey, is this Base*
+*   really an A*, or B* or C*? If so, give me that pointer. If not,
+*   return nullptr.
+*
+*   Conclusion: the dynamic_cast<X*>(p) that actually exists (checked
+*   by if conditions) is the one that is printed. :)
+*/
 void identify(Base  *p)
 {
     if (dynamic_cast<A*>(p)) //devuelve NULL si falla
@@ -55,6 +69,10 @@ void identify(Base  *p)
         std::cout << "Unknown type (pointer)" << std::endl;
 }
 
+
+/*  dynamic_cast<T&>(p) --> cannot return "no object", so instead it
+*   throws std::bad_cast. That's why the function wraps each cast in
+*   a try/catch. */
 void identify(Base &p)
 {
     try
@@ -84,6 +102,24 @@ void identify(Base &p)
     std::cout << "Unknown type (reference)" << std::endl;
 }
 
+/* Exercise summary:
+*   Challenge: How can we figure out which derived type (A, B or C)
+*              it really is, if we get only a Base* or Base& to some
+*              object?
+*
+*   Solution:
+*   1) We'll use dynamic_cast in this exercise. Why? It uses RTTI
+*      (Run-Time Type Information) t safely check the real type
+*      behind a polymorphic base pointer/reference.
+*
+*   2) Take into account what does dynamic_cast return in each case:
+*           a) Pointer case: void identify(Base* p); --> 
+*                   dynamic_cast returns nullptr if not valid pointer.
+*
+*           b) Reference case: void identify(Base& p);
+*                   dynamic_cast sends std::bad_cast exception, take with
+*                   try/catch.
+*/
 int main(void)
 {
     /* A pointer that points a Base class type class is created,

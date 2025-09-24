@@ -6,7 +6,7 @@
 /*   By: uxmancis <uxmancis>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/17 13:03:29 by uxmancis          #+#    #+#             */
-/*   Updated: 2025/09/18 18:04:45 by uxmancis         ###   ########.fr       */
+/*   Updated: 2025/09/24 14:13:23 by uxmancis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,10 @@
 ScalarConverter::ScalarConverter()
 {}
 
-/* Copy constructor */
+/* Copy constructor */ 
 ScalarConverter::ScalarConverter(const ScalarConverter &src_to_copy)
 {
-    *this = src_to_copy;
+    (void)src_to_copy;
 }
 
 /* Copy Assignment Operator */
@@ -225,7 +225,7 @@ bool ScalarConverter::is_substr_double(const std::string &input_str)
 
     if (isDouble(substr))
         return (true);
-    printf("substr is NOT double\n");
+    // printf("substr is NOT double\n");
     return (false);
 }
 
@@ -260,6 +260,79 @@ int ScalarConverter::detectLiteral(const std::string &input_str)
 	return(INVALID);
 }
 
+/* When parameter we want to cast is a CHAR */
+int ScalarConverter::convertFromChar(const char &c)
+{
+    display(c);
+    display(static_cast<int>(c));
+    display(static_cast<float>(c));
+    display(static_cast<double>(c));
+    return (0);
+}
+
+/* When parameter we want to cast is a INT */
+int ScalarConverter::convertFromInt(const int &i)
+{
+    display(static_cast<char>(i));
+    display(i);
+    display(static_cast<float>(i));
+    display(static_cast<double>(i));
+    return (0);
+}
+
+/* When parameter we want to cast is a FLOAT */
+int ScalarConverter::convertFromFloat(const float &f)
+{
+    display(static_cast<char>(f));
+    display(static_cast<int>(f));
+    display(f);
+    display(static_cast<double>(f));
+    return (0);
+}
+
+/* When parameter we want to cast is a DOUBLE */
+int ScalarConverter::convertFromDouble(const double &d)
+{
+    display(static_cast<char>(d));
+    display(static_cast<int>(d));
+    display(static_cast<float>(d));
+    display(d);
+    return (0);
+}
+
+int ScalarConverter::display (const char &c)
+{
+    if (isprint(c))
+        std::cout << "char: '" << c << "'" << std::endl;
+    else
+        std::cout << "char: Non displayable" << std::endl;
+    return (0);
+}
+
+int ScalarConverter::display (const int &i)
+{
+    std::cout << "int: " << i << std::endl;
+    return (0);
+}
+
+int ScalarConverter::display (const float &f)
+{
+    std::cout << "float: " << f;
+    if (f - static_cast<int>(f) == 0) //Prints .0 when needed
+        std::cout << ".0";
+    std::cout << "f" << std::endl;
+    return (0);
+}
+
+int ScalarConverter::display (const double &d)
+{
+    std::cout << "double: " << d;
+    if (d - static_cast<int>(d) == 0) //Prints .0 when needed
+        std::cout << ".0";
+    std::cout << std::endl;
+    return (0);
+}
+
 /* convert member function: converts std::string to the following
 * scalar types:
 *   > char: 'c', 'a', ...
@@ -283,25 +356,13 @@ int ScalarConverter::convert(const std::string &input_str)
         switch (ScalarConverter::detectLiteral(input_str))
         {
             case CHAR:
-            {
-                std::cout << "CHAR - pdte." << std::endl;
-                return(3);
-            }
+                return(convertFromChar(input_str[0]));
             case INT:
-            {
-                std::cout << "INT - pdte." << std::endl;
-                return(3);
-            }
+                return(convertFromInt(std::atoi(input_str.c_str())));
             case FLOAT:
-            {
-                std::cout << "FLOAT - pdte." << std::endl;
-                return(3);
-            }
+                return(convertFromFloat(std::atof(input_str.c_str()))); //atof: ascii to float, automáticamente convertFromFloat toma float type
             case DOUBLE:
-            {
-                std::cout << "DOUBLE - pdte." << std::endl;
-                return(3);
-            }
+                return(convertFromDouble(std::atof(input_str.c_str()))); //atof: ascii to float, automáticamente convertFromDouble toma double type
             case INVALID:
                 std::cerr << "Error: invalid input" << std::endl;
                 return (1);
@@ -311,6 +372,4 @@ int ScalarConverter::convert(const std::string &input_str)
         }
         return (0);
     }
-    
 }
-

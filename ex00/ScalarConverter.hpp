@@ -6,7 +6,7 @@
 /*   By: uxmancis <uxmancis>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/17 13:03:20 by uxmancis          #+#    #+#             */
-/*   Updated: 2025/09/18 17:11:07 by uxmancis         ###   ########.fr       */
+/*   Updated: 2025/09/24 11:49:10 by uxmancis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,16 @@ class ScalarConverter
             static bool is_order_ok(const std::string &input_str);
             static bool is_only_one_dot_and_exp(const std::string &input_str);
         static int detectLiteral(const std::string &input_str);
+        
+        static int convertFromChar(const char &c);
+        static int convertFromInt(const int &i);
+        static int convertFromFloat(const float &f);
+        static int convertFromDouble(const double &d);
+        
+        static int display (const char &c);
+        static int display (const int &i);
+        static int display (const float &f);
+        static int display (const double &d);
 
         
     public:
